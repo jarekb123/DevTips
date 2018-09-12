@@ -1,8 +1,8 @@
 def on_error(error_msg):
     def test_fun_decorator(test_fun):
-        def fun_wrapper():
+        def fun_wrapper(var):
             try:
-                test_fun()
+                test_fun(var)
             except Exception as e:
                 print(e)
                 print(error_msg)
@@ -11,16 +11,18 @@ def on_error(error_msg):
 
 
 @on_error("Error message")
-def test():
+def test(var1):
     print("test")
+    print(var1)
     raise Exception("test_exception")
 
 
 if __name__ == '__main__':
-    test()
+    test("variable")
 
 # Result:
 #
 # test
+# variable
 # test_exception
 # Error message
